@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/post_view_content_post"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:elevation="3dp"
+    android:background="@drawable/area">
+
+    <TextView
+        android:id="@+id/poster_content_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:text="[user1]" />
+
+    <TextView
+        android:id="@+id/message_content_post"
+        android:layout_below="@+id/poster_content_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"
+        android:text="你说的很对，但是我不同意。" />
+
+    <TextView
+        android:id="@+id/id_content_post"
+        android:layout_below="@+id/message_content_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_dark"
+        android:text="#id" />
+
+    <TextView
+        android:id="@+id/time_content_post"
+        android:layout_below="@+id/message_content_post"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_dark"
+        android:text="0分钟前"/>
+
+    <TextView
+        android:id="@+id/report_content_post"
+        android:layout_below="@+id/message_content_post"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_dark"
+        android:text="举报" />
+
+</RelativeLayout>

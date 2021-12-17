@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TreeHole">
         <activity
+            android:name=".PostActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReplyActivity"
             android:exported="false" />
         <activity

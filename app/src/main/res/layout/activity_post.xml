@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReplyActivity">
+    tools:context=".PostActivity">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.hcinteract.treehole.reply.HeaderLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <com.hcinteract.treehole.post.HeaderLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <com.hcinteract.treehole.reply.ContentLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_activity_post"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
