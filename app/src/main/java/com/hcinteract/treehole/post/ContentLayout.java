@@ -20,15 +20,5 @@ public class ContentLayout extends RelativeLayout {
         super(context, attrs);
         mContext = context;
         LayoutInflater.from(mContext).inflate(R.layout.content_post, this);
-
-        TextView report = findViewById(R.id.report_content_post);
-        report.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mContext != null) {
-                    Toast.makeText(mContext, "已收到您的举报", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 }

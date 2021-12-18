@@ -24,6 +24,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView message;
         private TextView id;
         private TextView time;
+        private TextView report;
 
         public ViewHolder(View view) {
             super(view);
@@ -31,6 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             this.message = view.findViewById(R.id.message_content_post);
             this.id = view.findViewById(R.id.id_content_post);
             this.time = view.findViewById(R.id.time_content_post);
+            this.report = view.findViewById(R.id.report_content_post);
         }
     }
 
@@ -47,6 +49,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         // 绑定子项布局
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_post, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
+        // 子项中举报文字的点击事件
+        viewHolder.report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String posterId = viewHolder.poster.getText().toString();
+                Toast.makeText(parent.getContext(), "您已成功举报用户" + posterId, Toast.LENGTH_SHORT).show();
+            }
+        });
+        // 子项整个视图的点击事件
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
