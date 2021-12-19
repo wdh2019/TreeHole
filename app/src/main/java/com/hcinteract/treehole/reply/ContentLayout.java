@@ -21,6 +21,11 @@ public class ContentLayout extends RelativeLayout {
         mContext = context;
         LayoutInflater.from(mContext).inflate(R.layout.content_reply, this);
 
+        Activity activity = (Activity)mContext;
+        Intent intent = activity.getIntent();
+        int treeHoleId = intent.getIntExtra("treeHoleId", 1);
+        int replyId = intent.getIntExtra("replyId", 0);
+
         EditText editText = findViewById(R.id.edit_content_reply);
         // 提交按钮绑定点击事件
         Button submitButton = findViewById(R.id.submit_content_reply);
@@ -28,8 +33,9 @@ public class ContentLayout extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (mContext != null) {
-                    String text = editText.getText().toString();
-                    Toast.makeText(mContext, "提交成功，输入的文字是：" + text, Toast.LENGTH_SHORT).show();
+                    String content = editText.getText().toString();
+                    String tip = "提交成功，" + " treeHoleId:" + treeHoleId + " replyId:" + replyId + " content: " + content;
+                    Toast.makeText(mContext, tip, Toast.LENGTH_SHORT).show();
                 }
             }
         });

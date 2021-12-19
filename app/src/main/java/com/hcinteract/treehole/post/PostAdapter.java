@@ -1,7 +1,7 @@
 package com.hcinteract.treehole.post;
 
 import android.content.Intent;
-import android.util.Log;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hcinteract.treehole.R;
 import com.hcinteract.treehole.ReplyActivity;
 import com.hcinteract.treehole.types.Post;
+import com.hcinteract.treehole.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,7 +66,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 int position = viewHolder.getLayoutPosition();
                 Post post = postList.get(position);
                 Intent intent = new Intent(parent.getContext(), ReplyActivity.class);
-                intent.putExtra("posterId", post.posterId);
+                intent.putExtra("treeHoleId", 1); // !!, 请用真实的 treeHoleId 替换此处
+                intent.putExtra("replyId", post.replyId);
                 parent.getContext().startActivity(intent);
             }
         });
@@ -76,10 +78,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // 根据子项数据，填充子项视图
         Post post = postList.get(position);
-        holder.poster.setText("[" + post.posterId + "]");
+        holder.poster.setText("[" + post.replier + "]");
         holder.message.setText(post.content);
-        holder.id.setText(post.posterId + "");
-        holder.time.setText(new Date(post.postTime).toString());
+        holder.id.setText(post.replyId + "");
+        holder.time.setText(DateUtil.fromNow(new Date(post.replyTime)));
     }
 
     @Override

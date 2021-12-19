@@ -1,15 +1,10 @@
 package com.hcinteract.treehole.types;
 
-public class Post {
-    public int posterId;
-    public String content;
-    public int rePostId;
-    public long postTime;
+import com.hcinteract.treehole.types.response.Reply;
 
-    public Post(int posterId, String content, int rePostId, long postTime) {
-        this.posterId = posterId;
-        this.content = content;
-        this.rePostId = rePostId;
-        this.postTime = postTime;
+public class Post extends Reply {
+
+    public Post(int replyId, int treeHoleId, int reReplyId, String replier, String content, long replyTime) {
+        super(replyId, treeHoleId, reReplyId, replier, content, replyTime);
     }
 }

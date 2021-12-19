@@ -12,9 +12,11 @@ public class ReplyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
+
+        // 接收 PostActivity 传来的 replyId 和 treeHoleId
         Intent intent = getIntent();
-        int posterId = intent.getIntExtra("posterId", -1);
+        int replyId = intent.getIntExtra("replyId", 0);
         TextView title = findViewById(R.id.title_header_reply);
-        title.setText("回复#" + posterId);
+        title.setText("回复#" + replyId);
     }
 }

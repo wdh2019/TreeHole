@@ -32,7 +32,7 @@ public class PostActivity extends AppCompatActivity {
     // 获取 一个 treehole 下的所有 posts
     private void initPosts() {
         for (int i = 0; i < 20 ; i++) {
-            postList.add(new Post(i, "这是第" + i + "个post", i+1, new Date().getTime()));
+            postList.add(new Post(i, 1, 0, "wang", "这是第" + i + "个post", new Date().getTime()));
         }
     }
 }
