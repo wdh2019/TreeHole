@@ -1,19 +1,11 @@
 package com.hcinteract.treehole.utils;
 
-import android.util.Log;
-
-import com.hcinteract.treehole.types.param.Param;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -69,14 +61,14 @@ public class HttpUtil {
         });
     }
 
-    public static void asyncPost(String url, Param[] params, final MyCall myCall) {
+    public static void asyncPost(String url, HashMap<String, Object> params, final MyCall myCall) {
         // body 为 json 格式
-        MediaType JSONType = MediaType.parse("applicatoin/json; charset=utf-8");
+        MediaType JSONType = MediaType.parse("application/json; charset=utf-8");
         JSONObject content = new JSONObject();
         try {
-            if (params.length > 0) {
-                for (Param param: params) {
-                    content.put(param.key, param.value);
+            if (params.size() > 0) {
+                for (String key: params.keySet()) {
+                    content.put(key, params.get(key));
                 }
             }
             RequestBody body = RequestBody.create(JSONType, content.toString());

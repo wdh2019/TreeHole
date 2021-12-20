@@ -3,16 +3,23 @@ package com.hcinteract.treehole.reply;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hcinteract.treehole.R;
+import com.hcinteract.treehole.utils.HttpUtil;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class ContentLayout extends RelativeLayout {
     private Context mContext;
@@ -34,8 +41,35 @@ public class ContentLayout extends RelativeLayout {
             public void onClick(View v) {
                 if (mContext != null) {
                     String content = editText.getText().toString();
-                    String tip = "提交成功，" + " treeHoleId:" + treeHoleId + " replyId:" + replyId + " content: " + content;
-                    Toast.makeText(mContext, tip, Toast.LENGTH_SHORT).show();
+                    // 发送数据给接口
+                    // url:localhost:8080/makeReply, method: post
+                    HashMap<String, Object> params = new HashMap<>();
+                    params.put("treeHoleId", treeHoleId);
+                    params.put("content", content);
+                    params.put("reReplyId", replyId);
+                    // android 模拟器会把 localhost 当做本身，用 10.0.2.2 的 ip 替代
+                    // https://blog.csdn.net/xulianboblog/article/details/51335361
+                    HttpUtil.asyncPost("http://10.0.2.2:8080/makeReply", params, new HttpUtil.MyCall() {
+                        @Override
+                        public void succeed(Call call, Response response) throws IOException {
+                            if (response.code() == 200) {
+                                // android 子线程不允许直接 Toast.makeText，前后要加上 Looper.prepare() 和 Looper.loop()
+                                // https://www.cnblogs.com/hzauxx/p/11928951.html
+                                Looper.prepare();
+                                Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            } else {
+                                Looper.prepare();
+                                Toast.makeText(mContext, response.code() + ":" + response.message(), Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                            }
+                        }
+
+                        @Override
+                        public void fail(Call call, IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
             }
         });
