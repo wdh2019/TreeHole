@@ -78,7 +78,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         // 根据子项数据，填充子项视图
         Post post = postList.get(position);
         holder.poster.setText("[" + post.replier + "]");
-        holder.message.setText(post.content);
+        // 在内容中拼接 reReplyId
+        String message = post.content;
+        if (post.reReplyId != 0) {
+            message = "回复#"+ post.reReplyId + ":" + message;
+        }
+        holder.message.setText(message);
         holder.id.setText(post.replyId + "");
         holder.time.setText(DateUtil.fromNow(new Date(post.replyTime)));
     }

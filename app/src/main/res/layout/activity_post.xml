@@ -18,8 +18,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_activity_post"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/nothing_content_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/gray_dark"
+            android:text="暂无内容，点击右上角的加号发帖吧~" />
 
     </LinearLayout>
 

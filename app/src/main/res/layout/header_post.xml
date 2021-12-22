@@ -26,15 +26,15 @@
         android:textSize="18sp"
         android:text="树洞" />
     <ImageView
-        android:id="@+id/pic_header_post"
+        android:id="@+id/add_header_post"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:layout_width="34dp"
+        android:layout_width="39dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
-        android:src="@drawable/pic"
-        android:contentDescription="picture" />
+        android:src="@drawable/add"
+        android:contentDescription="addPost" />
 
 </RelativeLayout>

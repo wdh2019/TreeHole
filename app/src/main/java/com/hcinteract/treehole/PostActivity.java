@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hcinteract.treehole.post.PostAdapter;
@@ -58,13 +59,17 @@ public class PostActivity extends AppCompatActivity {
                             long replyTime = jsonObject.getLong("replyTime");
                             postList.add(new Post(replyId, treeHoleId, reReplyId, replier, content, replyTime));
                         }
-                    // 等接口请求到数据后，再绑定视图
-                    RecyclerView recyclerView = findViewById(R.id.recyclerview_activity_post);
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                    recyclerView.setLayoutManager(layoutManager);
-                    PostAdapter adapter = new PostAdapter(postList);
-                    recyclerView.setAdapter(adapter);
-
+                        // 等接口请求到数据后，再绑定视图
+                        RecyclerView recyclerView = findViewById(R.id.recyclerview_activity_post);
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                        recyclerView.setLayoutManager(layoutManager);
+                        PostAdapter adapter = new PostAdapter(postList);
+                        recyclerView.setAdapter(adapter);
+                        // 如果有 posts，修改 nothing_content_post 中的文字
+                        if (postList.size() != 0) {
+                            TextView nothing = findViewById(R.id.nothing_content_post);
+                            nothing.setText("已经到底了，没有更多了~");
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

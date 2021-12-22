@@ -24,7 +24,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:textSize="18sp"
-        android:text="回复#0" />
+        android:text="回复" />
     <ImageView
         android:id="@+id/pic_header_reply"
         android:paddingStart="5dp"

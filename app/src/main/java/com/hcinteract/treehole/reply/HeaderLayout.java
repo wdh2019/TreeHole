@@ -2,11 +2,13 @@ package com.hcinteract.treehole.reply;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hcinteract.treehole.R;
@@ -18,6 +20,14 @@ public class HeaderLayout extends RelativeLayout {
         super(context, attrs);
         mContext = context;
         LayoutInflater.from(mContext).inflate(R.layout.header_reply, this);
+
+        Activity activity = (Activity)mContext;
+        Intent intent = activity.getIntent();
+        int replyId = intent.getIntExtra("replyId", 0);
+
+        // 设置标题
+        TextView title = findViewById(R.id.title_header_reply);
+        title.setText("回复#"+ replyId);
 
         // back按钮绑定点击事件
         ImageView back = (ImageView)findViewById(R.id.back_header_reply);
