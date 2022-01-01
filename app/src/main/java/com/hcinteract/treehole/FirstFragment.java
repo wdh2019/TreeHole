@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.hcinteract.treehole.databinding.FragmentFirstBinding;
 
@@ -29,6 +28,15 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 跳转到首页
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override

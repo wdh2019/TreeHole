@@ -21,8 +21,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_first" />
+
+<!--    新增-->
+<!--    layout_constraintTop_toTopOf       // 将所需视图的顶部与另一个视图的顶部对齐。-->
+
+<!--    layout_constraintTop_toBottomOf    // 将所需视图的顶部与另一个视图的底部对齐。-->
+
+<!--    layout_constraintBottom_toTopOf    // 将所需视图的底部与另一个视图的顶部对齐。-->
+
+<!--    layout_constraintBottom_toBottomOf // 将所需视图的底部与另一个视图的底部对齐。-->
+
+<!--    layout_constraintLeft_toLeftOf     // 将所需视图的左边与另一个视图的左边对齐。-->
+
+<!--    layout_constraintLeft_toRightOf    // 将所需视图的左边与另一个视图的右边对齐。-->
+
+<!--    layout_constraintRight_toLeftOf    // 将所需视图的右边与另一个视图的左边对齐。-->
+
+<!--    layout_constraintRight_toRightOf   // 将所需视图的右边与另一个视图的右边对齐。-->
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        app:layout_constraintTop_toBottomOf = "@id/button_first"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

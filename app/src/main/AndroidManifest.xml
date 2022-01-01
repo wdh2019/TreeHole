@@ -16,6 +16,12 @@
             android:name=".PostActivity"
             android:exported="false" />
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReleaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReplyActivity"
             android:exported="false" />
         <activity
