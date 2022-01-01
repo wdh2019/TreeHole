@@ -9,13 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.hcinteract.treehole.R;
 import com.hcinteract.treehole.ReleaseActivity;
+import com.hcinteract.treehole.types.home;
 import com.hcinteract.treehole.utils.HttpUtil;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.Call;
@@ -23,6 +32,7 @@ import okhttp3.Response;
 
 public class homeSearchLayout extends RelativeLayout {
     private Context mContext;
+    private ArrayList<home> homeList = new ArrayList<home>();
 
     public homeSearchLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,17 +48,41 @@ public class homeSearchLayout extends RelativeLayout {
             @Override
             public void onClick(View view) {
                 if (mContext != null) {
-                    Toast.makeText(mContext, "搜索按钮", Toast.LENGTH_SHORT).show();
                     String content = editText.getText().toString();
+//                    Toast.makeText(mContext, "搜索内容为：" + content, Toast.LENGTH_SHORT).show();
+
                     HashMap<String, Object> params = new HashMap<>();
-                    params.put("content", content);
-                    HttpUtil.asyncPost("http://10.0.2.2:8080/makeReply", params, new HttpUtil.MyCall() {
+                    params.put("treeHoleId", Integer.valueOf(content));
+                    HttpUtil.asyncPost("http://10.0.2.2:8080/searchTreeHoles", params, new HttpUtil.MyCall() {
                         @Override
                         public void succeed(Call call, Response response) throws IOException {
                             if (response.code() == 200) {
-                                Looper.prepare();
-                                Toast.makeText(mContext, response.message(), Toast.LENGTH_SHORT).show();
-                                Looper.loop();
+                                String str = response.body().string();
+                                try {
+                                    // replies 是一个数组
+                                    JSONArray jsonArray = new JSONArray(str);
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        int treeHoleId = jsonObject.getInt("treeHoleId");
+                                        String content = jsonObject.getString("content");
+                                        String creator = jsonObject.getString("creator");
+                                        long createTime = jsonObject.getLong("createTime");
+                                        homeList.add(new home(treeHoleId, content,creator,createTime));
+                                    }
+                                    // 等接口请求到数据后，再绑定视图
+                                    RecyclerView recyclerView = findViewById(R.id.recyclerview_activity_home);
+                                    LinearLayoutManager layoutManager = new LinearLayoutManager(mContext.getApplicationContext());
+                                    recyclerView.setLayoutManager(layoutManager);
+                                    homeAdapter adapter = new homeAdapter(homeList);
+                                    recyclerView.setAdapter(adapter);
+
+                                    if (homeList.size() != 0) {
+                                        TextView nothing = findViewById(R.id.nothing_content_post);
+                                        nothing.setText("已经到底了，没有更多了~");
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             } else {
                                 Looper.prepare();
                                 Toast.makeText(mContext, response.code() + ":" + response.message(), Toast.LENGTH_SHORT).show();

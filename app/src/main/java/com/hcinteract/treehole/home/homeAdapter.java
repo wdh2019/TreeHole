@@ -17,20 +17,19 @@ import java.util.ArrayList;
 
 public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
    protected class ViewHolder extends RecyclerView.ViewHolder {
-       private TextView title;
-       private TextView user;
-       private TextView time;
-       private TextView intro;
 
-       private TextView agrees;
-       private TextView comments;
+       private TextView treeHoleId;
+       private TextView content;
+       private TextView creator;
+       private TextView createTime;
 
        public ViewHolder(View view) {
            super(view);
-           this.title = view.findViewById(R.id.home_content_title);
-           this.user = view.findViewById(R.id.home_content_user);
-           this.time = view.findViewById(R.id.home_content_time);
-           this.intro = view.findViewById(R.id.home_content_intro);
+           this.treeHoleId = view.findViewById(R.id.home_content_treeHoleId);
+           this.content = view.findViewById(R.id.home_content_content);
+           this.createTime = view.findViewById(R.id.home_content_createTime);
+           this.creator = view.findViewById(R.id.home_content_creator);
+
        }
    }
 
@@ -44,44 +43,27 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
    @NonNull
    @Override
    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       // 绑定子项布局
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_content, parent, false);
        ViewHolder viewHolder = new ViewHolder(view);
 
-       viewHolder.intro.setOnClickListener(new View.OnClickListener() {
+       viewHolder.content.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-//                Toast.makeText(parent.getContext(), "您已成功举报用户" , Toast.LENGTH_SHORT).show();
-               int position = viewHolder.getLayoutPosition();
                Intent intent = new Intent(parent.getContext(), PostActivity.class);
                parent.getContext().startActivity(intent);
            }
        });
 
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // 点击整个子项，跳转到 ReplyActivity
-//                int position = viewHolder.getLayoutPosition();
-//                home home = homeList.get(position);
-//                Intent intent = new Intent(parent.getContext(), HomeActivity.class);
-////                intent.putExtra("homeId", home.homeId);
-//                parent.getContext().startActivity(intent);
-//            }
-//        });
        return viewHolder;
    }
 
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-       // 根据子项数据，填充子项视图
        home home = homeList.get(position);
-       holder.title.setText(home.title);
-       holder.user.setText(home.user);
-       holder.intro.setText(home.intro);
-       holder.time.setText(home.time);
-//        holder.agrees.setText(home.agrees);
-//        holder.comments.setText(home.comments);
+       holder.treeHoleId.setText(home.treeHoleId);
+       holder.creator.setText(home.creator);
+       holder.content.setText(home.content);
+       holder.createTime.setText("2022-1-2");
    }
 
    @Override
