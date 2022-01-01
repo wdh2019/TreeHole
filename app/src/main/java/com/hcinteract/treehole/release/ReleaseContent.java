@@ -27,6 +27,7 @@ public class ReleaseContent extends RelativeLayout {
         LayoutInflater.from(mContext).inflate(R.layout.home_release, this);
 
         EditText editText = findViewById(R.id.edit_home_release);
+        EditText creator = findViewById(R.id.edit_home_release_creator);
         // 提交按钮绑定点击事件
         Button submitButton = findViewById(R.id.submit_edit_home_release);
         submitButton.setOnClickListener(new OnClickListener() {
@@ -34,10 +35,12 @@ public class ReleaseContent extends RelativeLayout {
             public void onClick(View v) {
                 if (mContext != null) {
                     String text = editText.getText().toString();
-                    Toast.makeText(mContext, "提交成功，输入的文字是：" + text, Toast.LENGTH_SHORT).show();
+                    String tCreator = creator.getText().toString();
+//                    Toast.makeText(mContext, "提交成功，输入的文字是：" + text + "创建者：" + tCreator, Toast.LENGTH_SHORT).show();
 
                     HashMap<String, Object> params = new HashMap<>();
                     params.put("content", text);
+                    params.put("creator", tCreator);
                     HttpUtil.asyncPost("http://10.0.2.2:8080/createTreeHole", params, new HttpUtil.MyCall() {
                         @Override
                         public void succeed(Call call, Response response) throws IOException {
