@@ -46,10 +46,14 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_content, parent, false);
        ViewHolder viewHolder = new ViewHolder(view);
 
-       viewHolder.content.setOnClickListener(new View.OnClickListener() {
+       viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent intent = new Intent(parent.getContext(), PostActivity.class);
+               String treeHoleIdStr = viewHolder.treeHoleId.getText().toString();
+               int treeHoleId = Integer.parseInt(treeHoleIdStr);
+               intent.putExtra("treeHoleId", treeHoleId);
+               intent.putExtra("content", viewHolder.content.getText().toString());
                parent.getContext().startActivity(intent);
            }
        });
@@ -60,7 +64,7 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
    @Override
    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
        home home = homeList.get(position);
-       holder.treeHoleId.setText(home.treeHoleId);
+       holder.treeHoleId.setText(home.treeHoleId+"");
        holder.creator.setText(home.creator);
        holder.content.setText(home.content);
        holder.createTime.setText("2022-1-2");

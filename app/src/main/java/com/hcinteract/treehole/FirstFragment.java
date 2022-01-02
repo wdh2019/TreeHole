@@ -37,17 +37,6 @@ public class FirstFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 跳转到 ReplyActivity
-                Intent intent = new Intent(getActivity(), PostActivity.class);
-                startActivity(intent);
-//                NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });
     }
 
     @Override

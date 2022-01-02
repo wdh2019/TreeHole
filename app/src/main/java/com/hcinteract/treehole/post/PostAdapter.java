@@ -1,5 +1,6 @@
 package com.hcinteract.treehole.post;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,11 +62,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // postActivity 接收到的 intent
+                Activity activity = (Activity)parent.getContext();
+                Intent receivedIntent = activity.getIntent();
+                int treeHoleId = receivedIntent.getIntExtra("treeHoleId", 1);
+
                 // 点击整个子项，跳转到 ReplyActivity
                 int position = viewHolder.getLayoutPosition();
                 Post post = postList.get(position);
                 Intent intent = new Intent(parent.getContext(), ReplyActivity.class);
-                intent.putExtra("treeHoleId", 1); // !!, 请用真实的 treeHoleId 替换此处
+                intent.putExtra("treeHoleId", treeHoleId);
                 intent.putExtra("replyId", post.replyId);
                 parent.getContext().startActivity(intent);
             }

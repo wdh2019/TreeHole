@@ -33,6 +33,7 @@ public class ContentLayout extends RelativeLayout {
         int treeHoleId = intent.getIntExtra("treeHoleId", 1);
         int replyId = intent.getIntExtra("replyId", 0);
 
+        EditText editName = findViewById(R.id.edit_name_reply);
         EditText editText = findViewById(R.id.edit_content_reply);
         // 提交按钮绑定点击事件
         Button submitButton = findViewById(R.id.submit_content_reply);
@@ -40,13 +41,23 @@ public class ContentLayout extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 if (mContext != null) {
+                    String name = editText.getText().toString();
                     String content = editText.getText().toString();
+                    if (name.length() == 0) {
+                        Toast.makeText(mContext, "请填写你的昵称", Toast.LENGTH_SHORT);
+                        return;
+                    }
+                    if (content.length() == 0) {
+                        Toast.makeText(mContext, "请填写发帖内容", Toast.LENGTH_SHORT);
+                        return;
+                    }
                     // 发送数据给接口
                     // url:localhost:8080/makeReply, method: post
                     HashMap<String, Object> params = new HashMap<>();
                     params.put("treeHoleId", treeHoleId);
                     params.put("content", content);
                     params.put("reReplyId", replyId);
+                    params.put("replier", name);
                     // android 模拟器会把 localhost 当做本身，用 10.0.2.2 的 ip 替代
                     // https://blog.csdn.net/xulianboblog/article/details/51335361
                     HttpUtil.asyncPost("http://10.0.2.2:8080/makeReply", params, new HttpUtil.MyCall() {

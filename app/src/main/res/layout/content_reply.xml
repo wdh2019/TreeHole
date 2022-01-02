@@ -4,6 +4,13 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/edit_name_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/edit_content_reply"
+        android:hint="填入你的昵称" />
+
+    <EditText
         android:id="@+id/edit_content_reply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +23,7 @@
         android:enabled="true"
         android:gravity="top"
         android:minLines="8"
+        android:hint="填入你要发表的内容"
         android:scrollbars="vertical" />
 
     <Button
