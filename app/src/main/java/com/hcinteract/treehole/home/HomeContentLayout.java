@@ -15,5 +15,7 @@ public class HomeContentLayout extends RelativeLayout {
         super(context, attrs);
         mContext = context;
         LayoutInflater.from(mContext).inflate(R.layout.home_content, this);
+
+
     }
 }

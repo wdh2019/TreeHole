@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,12 +24,18 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
        private TextView creator;
        private TextView createTime;
 
+       private TextView agree;
+       private TextView share;
+
        public ViewHolder(View view) {
            super(view);
            this.treeHoleId = view.findViewById(R.id.home_content_treeHoleId);
            this.content = view.findViewById(R.id.home_content_content);
            this.createTime = view.findViewById(R.id.home_content_createTime);
            this.creator = view.findViewById(R.id.home_content_creator);
+
+           this.agree = view.findViewById(R.id.home_agree);
+           this.share = view.findViewById(R.id.home_share);
 
        }
    }
@@ -45,6 +52,20 @@ public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder> {
    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_content, parent, false);
        ViewHolder viewHolder = new ViewHolder(view);
+
+       viewHolder.share.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Toast.makeText(parent.getContext(), "分享功能为保留功能哦~" , Toast.LENGTH_SHORT).show();
+           }
+       });
+
+       viewHolder.agree.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Toast.makeText(parent.getContext(), "点赞功能为保留功能哦~" , Toast.LENGTH_SHORT).show();
+           }
+       });
 
        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override

@@ -23,19 +23,23 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 public class HomeActivity extends AppCompatActivity {
-    private ArrayList<home> homeList = new ArrayList<home>();
+//    private ArrayList<home> homeList = new ArrayList<home>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        initHome();
+        // 如果还没有初始化的话
+        if(!Data.getIsInit()){
+            initHome();
+            Data.finishInit();
+        }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview_activity_home);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        homeAdapter adapter = new homeAdapter(homeList);
+        homeAdapter adapter = new homeAdapter(Data.getHomeList());
         recyclerView.setAdapter(adapter);
     }
 
@@ -85,7 +89,9 @@ public class HomeActivity extends AppCompatActivity {
 //        });
 
         for (int i = 0; i < 20 ; i++) {
-            homeList.add(new home(i, "这里是测试数据"+i ,"测试创建者"  + i,11));
+            home newhome = new home(i, "这里是测试数据"+i ,"测试创建者"  + i,11);
+//            homeList.add(new home(i, "这里是测试数据"+i ,"测试创建者"  + i,11));
+            Data.addHomeList(newhome);
         }
     }
 
