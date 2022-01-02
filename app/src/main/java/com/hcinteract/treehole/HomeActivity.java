@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 //        });
 
         for (int i = 0; i < 20 ; i++) {
-            homeList.add(new home("标题" + i, "dr", "2021-12-18", "这里是一段介绍",1,1));
+            homeList.add(new home(i, "这里是测试数据"+i ,"测试创建者"  + i,11));
         }
     }
 
